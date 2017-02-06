@@ -20,7 +20,7 @@ Will return a list of all instances that you have the authority to view, with re
                     "id": "CWP001",
                     "name": "CWP Instance 001",
                     "primary_domain": "mom.govt.nz",
-                    "agency": "Minstry of Magic",
+                    "agency": "Ministry of Magic",
                     "size": "large",
                     "disaster_recovery": "active",
                     "created": "02-07-2014",
@@ -102,4 +102,52 @@ Get data about a specific instance
                     ]
                 }
             }
+        }
+        
+### List users associated with an instance [GET /instances/$id/users]
+
+Returns a list of roles and users in those roles for an instance
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "type": "roles",
+                    "id": "21",
+                    "name": "Instance Manager",
+                    "users": {
+                        "data": [
+                            {
+                                "type": "users",
+                                "id": "2379",
+                                "name": "Albus Dumbledore",
+                                "email": "sherbert.lemon@hogwarts.uk",
+                                "phone": "0203040506"
+                            },
+                            {
+                                "type": "users",
+                                "id": "21279",
+                                "name": "Severus Snape",
+                                "email": "halfbloodprince@hogwarts.uk",
+                                "phone": "020666666"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "roles",
+                    "id": "22",
+                    "name": "Deployment Manager",
+                    "users": {
+                        "data": {
+                            "type": "users",
+                            "id": "224",
+                            "name": "Minerva McGonagall",
+                            "email": "mcgryffindor@hogwarts.uk",
+                            "phone": "02358222506"
+                        }
+                    }
+                }
+            ]
         }
