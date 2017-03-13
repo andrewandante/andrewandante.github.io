@@ -3,6 +3,6 @@
 ```bash
 sudo npm install -g aglio
 
-aglio -i apiary/input.md -o html/output.html
+aglio -i apiary.apib -o html/output.html
 ```
 
