@@ -14,6 +14,10 @@ an endpoint should include the following:
 
 ## Making a request: Headers [GET]
 
+These headers will authenticate you against Deploynaut to evaluate whether you have the permissions necessary
+to access the information you are requesting. You can send a GET request to www.deploy.cwp.govt.nz/naut to
+test that you are authenticating correctly - it will return your user information.
+
 + Request (application/json)
 
     + Headers
@@ -23,6 +27,7 @@ an endpoint should include the following:
             X-user-token: fa88787fcd99787
             Accept: application/json
             Host: deploy.cwp.govt.nz
+            
 
 + Response 200 (application/json)
 
@@ -38,13 +43,10 @@ an endpoint should include the following:
             ]
         }
 
-## Authentication Tokens [/tokens]
 
-You will require 
+# Instances [/projects]
 
-## Instances [/projects]
-
-### List all instances [GET /projects]
+## List all instances [GET /projects]
 
 Will return a list of all instances that you have the authority to view, with relevant datapoints.
 
@@ -107,14 +109,13 @@ Will return a list of all instances that you have the authority to view, with re
             ]
         }
 
-### Get data about an instance [GET /project/$name]
+## Get data about an instance [GET /project/$name]
 
 Get data about a specific instance
 
 + Response 200 (application/json)
 
         {
-            "count": 1,
             "data": {
                 "type": "instances",
                 "id": "CWP001",
@@ -168,7 +169,7 @@ Get data about a specific instance
             }
         }
         
-### List users associated with an instance [GET /project/$id/users]
+## List users associated with an instance [GET /project/$id/users]
 
 Returns a list of roles and users in those roles for an instance
 
@@ -221,9 +222,9 @@ Returns a list of roles and users in those roles for an instance
         }
         
         
-## Snapshots [/snapshots]
+# Snapshots [/snapshots]
 
-### List all snapshots for an instance [GET /project/$name/snapshots]
+## List all snapshots for an instance [GET /project/$name/snapshots]
 
 Returns a list of snapshots associated with an instance
 
@@ -266,7 +267,131 @@ Returns a list of snapshots associated with an instance
                         ]
                     },
                     "mode": "db",
-                    "size": "2096"
+                    "size": "2096",
+                    "download_link": "www.deploy.cwp.govt.nz/path/to/snapshot.sspak"
                 }
             ]
         }
+        
+## Create a new snapshot [POST /project/$name/snapshots]
+
+Create a snapshot of an environment associated with an instance. The response immediately returned will
+contain a `location`, which will return a HTTP 204 response until the snapshot has completed. At that
+point, the response will change to HTTP 200, and the download link will be returned.
+
++ Parameters
+
+    + environment: prod (string)
+    + mode: db|assets|all (string)
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "environment": "prod",
+                "mode": "all",
+            }
+
+
++ Response 202 (application/json)
+
+        {
+            "location": "www.deploy.cwp.govt.nz/naut/project/CWP001/snapshots/23",
+            "data": [
+                {
+                    "type": "snapshots",
+                    "id": "23",
+                    "created": "25-01-2017",
+                    "author": {
+                        "data": [
+                            {
+                                "type": "users",
+                                "id": "2379",
+                                "name": "Albus Dumbledore",
+                                "email": "sherbert.lemon@hogwarts.uk",
+                                "phone": "0203040506"
+                            }
+                        ]
+                    },
+                    "source": {
+                        "data": [
+                            {
+                                "type": "environments",
+                                "id": "1",
+                                "name": "prod"
+                            }
+                        ]
+                    },
+                    "owner":  {
+                        "data": [
+                            {
+                                "type": "environments",
+                                "id": "1",
+                                "name": "prod"
+                            }
+                        ]
+                    },
+                    "mode": "all"
+                }
+            ]
+        }
+        
+## Get the status of a snapshot [GET /project/$name/snapshots/$id]
+
+You should poll this URL (returned from the CREATE SNAPSHOT method) to receive updates on the status of
+the snapshot. If the snapshot is incomplete, the response will be HTTP 204 (NO CONTENT); otherwise an
+HTTP 200 response will be returned, with a `download_link` from which you can download the `.sspak` file.
+
++ Response 204
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "type": "snapshots",
+                    "id": "23",
+                    "created": "25-01-2017",
+                    "author": {
+                        "data": [
+                            {
+                                "type": "users",
+                                "id": "2379",
+                                "name": "Albus Dumbledore",
+                                "email": "sherbert.lemon@hogwarts.uk",
+                                "phone": "0203040506"
+                            }
+                        ]
+                    },
+                    "source": {
+                        "data": [
+                            {
+                                "type": "environments",
+                                "id": "1",
+                                "name": "prod"
+                            }
+                        ]
+                    },
+                    "owner":  {
+                        "data": [
+                            {
+                                "type": "environments",
+                                "id": "1",
+                                "name": "prod"
+                            }
+                        ]
+                    },
+                    "mode": "all",
+                    "size": "3339820989",
+                    "download_link": "www.deploy.cwp.govt.nz/path/to/snapshot.sspak"
+                }
+            ]
+        }
+
+## Delete a snapshot [DELETE /project/$name/snapshots/$id]
+
+This URL will delete the snapshot from the database. Please be careful with this, as reversing the operation
+is expensive and difficult.
+
++ Response 204
