@@ -3,17 +3,55 @@ HOST: http://deploy.cwp.govt.nz/naut
 
 # Deploynaut API
 
-This API is a newly developed interface for the CWP Dashboard.
+This API is a newly developed interface for the CWP Dashboard. Data structure is based on the 
+[JSON API specifications](http://jsonapi.org/).
+
+
+# Using the API [/]
+
+In order to use the API, you will need to acquire a token via Service Desk request. Any request you make to
+an endpoint should include the following:
+
+## Making a request: Headers [GET]
+
++ Request (application/json)
+
+    + Headers
+    
+            X-api-version: 1.0
+            X-user-id: 1242
+            X-user-token: fa88787fcd99787
+            Accept: application/json
+            Host: deploy.cwp.govt.nz
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "type": "users",
+                    "id": "2379",
+                    "name": "Albus Dumbledore",
+                    "email": "sherbert.lemon@hogwarts.uk",
+                    "phone": "0203040506"
+                }
+            ]
+        }
+
+## Authentication Tokens [/tokens]
+
+You will require 
 
 ## Instances [/projects]
 
-### List All Instances [GET /projects]
+### List all instances [GET /projects]
 
 Will return a list of all instances that you have the authority to view, with relevant datapoints.
 
 + Response 200 (application/json)
 
         {
+            "count": 1,
             "data": [
                 {
                     "type": "instances",
@@ -25,13 +63,24 @@ Will return a list of all instances that you have the authority to view, with re
                     "disaster_recovery": "active",
                     "created": "02-07-2014",
                     "environments": {
+                        "count": 2,
                         "data": [
                             {
                                 "type": "environments",
                                 "id": "1",
                                 "name": "prod",
                                 "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                                "deployer": "Albus Dumbledore",
+                                "deployer": {
+                                    "data": [
+                                        {
+                                            "type": "users",
+                                            "id": "2379",
+                                            "name": "Albus Dumbledore",
+                                            "email": "sherbert.lemon@hogwarts.uk",
+                                            "phone": "0203040506"
+                                        }
+                                    ]
+                                },
                                 "date": "24-01-2017"
                             },
                             {
@@ -39,25 +88,18 @@ Will return a list of all instances that you have the authority to view, with re
                                 "id": "2",
                                 "name": "uat",
                                 "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                                "deployer": "Severus Snape",
+                                "deployer": {
+                                    "data": [
+                                        {
+                                            "type": "users",
+                                            "id": "21279",
+                                            "name": "Severus Snape",
+                                            "email": "halfbloodprince@hogwarts.uk",
+                                            "phone": "020666666"
+                                        }
+                                    ]
+                                },
                                 "date": "23-01-2017"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "type": "instances",
-                    "id": "CWP002",
-                    "name": "CWP Instance 002",
-                    "primary_domain": "butsiriusly.govt.nz",
-                    "agency": "Ministry of Magic",
-                    "size": "small",
-                    "disaster_recovery": "none",
-                    "created": "07-07-2016",
-                    "environments": {
-                        "data": [
-                            {
-                                ...
                             }
                         ]
                     }
@@ -72,6 +114,7 @@ Get data about a specific instance
 + Response 200 (application/json)
 
         {
+            "count": 1,
             "data": {
                 "type": "instances",
                 "id": "CWP001",
@@ -82,13 +125,24 @@ Get data about a specific instance
                 "disaster_recovery": "active",
                 "created": "02-07-2014",
                 "environments": {
+                    "count": 2,
                     "data": [
                         {
                             "type": "environments",
                             "id": "1",
                             "name": "prod",
                             "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                            "deployer": "Albus Dumbledore",
+                            "deployer": {
+                                "data": [
+                                    {
+                                        "type": "users",
+                                        "id": "2379",
+                                        "name": "Albus Dumbledore",
+                                        "email": "sherbert.lemon@hogwarts.uk",
+                                        "phone": "0203040506"
+                                    }
+                                ]
+                            },
                             "date": "24-01-2017"
                         },
                         {
@@ -96,7 +150,17 @@ Get data about a specific instance
                             "id": "2",
                             "name": "uat",
                             "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                            "deployer": "Severus Snape",
+                            "deployer": {
+                                "data": [
+                                    {
+                                        "type": "users",
+                                        "id": "21279",
+                                        "name": "Severus Snape",
+                                        "email": "halfbloodprince@hogwarts.uk",
+                                        "phone": "020666666"
+                                    }
+                                ]
+                            },
                             "date": "23-01-2017"
                         }
                     ]
@@ -117,6 +181,7 @@ Returns a list of roles and users in those roles for an instance
                     "id": "21",
                     "name": "Instance Manager",
                     "users": {
+                        "count": 2,
                         "data": [
                             {
                                 "type": "users",
@@ -140,14 +205,68 @@ Returns a list of roles and users in those roles for an instance
                     "id": "22",
                     "name": "Deployment Manager",
                     "users": {
-                        "data": {
-                            "type": "users",
-                            "id": "224",
-                            "name": "Minerva McGonagall",
-                            "email": "mcgryffindor@hogwarts.uk",
-                            "phone": "02358222506"
-                        }
+                        "count": 1,
+                        "data": [
+                            {
+                                "type": "users",
+                                "id": "224",
+                                "name": "Minerva McGonagall",
+                                "email": "mcgryffindor@hogwarts.uk",
+                                "phone": "02358222506"
+                            }
+                        ]
                     }
+                }
+            ]
+        }
+        
+        
+## Snapshots [/snapshots]
+
+### List all snapshots for an instance [GET /project/$name/snapshots]
+
+Returns a list of snapshots associated with an instance
+
++ Response 200 (application/json)
+
+        {
+            "count": 1,
+            "data": [
+                {
+                    "type": "snapshots",
+                    "id": "398433",
+                    "created": "25-01-2017",
+                    "author": {
+                        "data": [
+                            {
+                                "type": "users",
+                                "id": "2379",
+                                "name": "Albus Dumbledore",
+                                "email": "sherbert.lemon@hogwarts.uk",
+                                "phone": "0203040506"
+                            }
+                        ]
+                    },
+                    "source": {
+                        "data": [
+                            {
+                                "type": "environments",
+                                "id": "1",
+                                "name": "prod"
+                            }
+                        ]
+                    },
+                    "owner":  {
+                        "data": [
+                            {
+                                "type": "environments",
+                                "id": "2",
+                                "name": "uat"
+                            }
+                        ]
+                    },
+                    "mode": "db",
+                    "size": "2096"
                 }
             ]
         }
