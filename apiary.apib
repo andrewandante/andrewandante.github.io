@@ -169,7 +169,7 @@ Get data about a specific stack
             }
         }
 
-## List users associated with a stack [GET /project/$id/users]
+## List users [GET /project/$id/users]
 
 Returns a list of roles and users in those roles for a stack
 
@@ -224,7 +224,7 @@ Returns a list of roles and users in those roles for a stack
 
 # Snapshots [/snapshots]
 
-## List all snapshots for a stack [GET /project/$name/snapshots]
+## List all snapshots [GET /project/$name/snapshots]
 
 Returns a list of snapshots associated with a stack
 
@@ -273,7 +273,7 @@ Returns a list of snapshots associated with a stack
             ]
         }
 
-## Create a new snapshot [POST /project/$name/snapshots]
+## Create a snapshot [POST /project/$name/snapshots]
 
 Create a snapshot of an environment associated with a stack. The response immediately returned will
 contain a `location`, which will return a HTTP 204 response until the snapshot has completed. At that
@@ -337,7 +337,7 @@ point, the response will change to HTTP 200, and the download link will be retur
             ]
         }
 
-## Get the status of a snapshot [GET /project/$name/snapshots/$id]
+## Get snapshot status [GET /project/$name/snapshots/$id]
 
 You should poll this URL (returned from the CREATE SNAPSHOT method) to receive updates on the status of
 the snapshot. If the snapshot is incomplete, the response will be HTTP 204 (NO CONTENT); otherwise an
