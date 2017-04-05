@@ -3,7 +3,7 @@ HOST: http://deploy.cwp.govt.nz/naut
 
 # Deploynaut API
 
-This API is a newly developed interface for the CWP Dashboard. Data structure is based on the 
+This API is a newly developed interface for the CWP Dashboard. Data structure is based on the
 [JSON API specifications](http://jsonapi.org/).
 
 
@@ -21,13 +21,13 @@ test that you are authenticating correctly - it will return your user informatio
 + Request (application/json)
 
     + Headers
-    
+
             X-api-version: 1.0
-            X-user-id: 1242
+            X-user-email: sherbert.lemon@hogwarts.uk
             X-user-token: fa88787fcd99787
             Accept: application/json
             Host: deploy.cwp.govt.nz
-            
+
 
 + Response 200 (application/json)
 
@@ -44,11 +44,11 @@ test that you are authenticating correctly - it will return your user informatio
         }
 
 
-# Instances [/projects]
+# Stacks [/projects]
 
-## List all instances [GET /projects]
+## List all stacks [GET /projects]
 
-Will return a list of all instances that you have the authority to view, with relevant datapoints.
+Will return a list of all stacks that you have the authority to view, with relevant datapoints.
 
 + Response 200 (application/json)
 
@@ -56,9 +56,9 @@ Will return a list of all instances that you have the authority to view, with re
             "count": 1,
             "data": [
                 {
-                    "type": "instances",
+                    "type": "stacks",
                     "id": "CWP001",
-                    "name": "CWP Instance 001",
+                    "name": "CWP Stack 001",
                     "primary_domain": "mom.govt.nz",
                     "agency": "Ministry of Magic",
                     "size": "large",
@@ -109,17 +109,17 @@ Will return a list of all instances that you have the authority to view, with re
             ]
         }
 
-## Get data about an instance [GET /project/$name]
+## Get data about a stack [GET /project/$name]
 
-Get data about a specific instance
+Get data about a specific stack
 
 + Response 200 (application/json)
 
         {
             "data": {
-                "type": "instances",
+                "type": "stacks",
                 "id": "CWP001",
-                "name": "CWP Instance 001",
+                "name": "CWP Stack 001",
                 "primary_domain": "mom.govt.nz",
                 "agency": "Minstry of Magic",
                 "size": "large",
@@ -168,10 +168,10 @@ Get data about a specific instance
                 }
             }
         }
-        
-## List users associated with an instance [GET /project/$id/users]
 
-Returns a list of roles and users in those roles for an instance
+## List users associated with a stack [GET /project/$id/users]
+
+Returns a list of roles and users in those roles for a stack
 
 + Response 200 (application/json)
 
@@ -180,7 +180,7 @@ Returns a list of roles and users in those roles for an instance
                 {
                     "type": "roles",
                     "id": "21",
-                    "name": "Instance Manager",
+                    "name": "Stack Manager",
                     "users": {
                         "count": 2,
                         "data": [
@@ -220,13 +220,13 @@ Returns a list of roles and users in those roles for an instance
                 }
             ]
         }
-        
-        
+
+
 # Snapshots [/snapshots]
 
-## List all snapshots for an instance [GET /project/$name/snapshots]
+## List all snapshots for a stack [GET /project/$name/snapshots]
 
-Returns a list of snapshots associated with an instance
+Returns a list of snapshots associated with a stack
 
 + Response 200 (application/json)
 
@@ -272,10 +272,10 @@ Returns a list of snapshots associated with an instance
                 }
             ]
         }
-        
+
 ## Create a new snapshot [POST /project/$name/snapshots]
 
-Create a snapshot of an environment associated with an instance. The response immediately returned will
+Create a snapshot of an environment associated with a stack. The response immediately returned will
 contain a `location`, which will return a HTTP 204 response until the snapshot has completed. At that
 point, the response will change to HTTP 200, and the download link will be returned.
 
@@ -287,7 +287,7 @@ point, the response will change to HTTP 200, and the download link will be retur
 + Request (application/json)
 
     + Body
-    
+
             {
                 "environment": "prod",
                 "mode": "all",
@@ -336,7 +336,7 @@ point, the response will change to HTTP 200, and the download link will be retur
                 }
             ]
         }
-        
+
 ## Get the status of a snapshot [GET /project/$name/snapshots/$id]
 
 You should poll this URL (returned from the CREATE SNAPSHOT method) to receive updates on the status of
