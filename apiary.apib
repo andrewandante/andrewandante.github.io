@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://deploy.cwp.govt.nz/naut
+HOST: http://deploy.cwp.govt.nz
 
 # Deploynaut API
 
@@ -7,24 +7,32 @@ This API is a newly developed interface for the CWP Dashboard. Data structure is
 [JSON API specifications](http://jsonapi.org/).
 
 
-# Using the API [/]
+# Using the API [/naut]
 
-In order to use the API, you will need to acquire a token via Service Desk request. Any request you make to
-an endpoint should include the following:
+In order to use the API, you will need to acquire a token via Service Desk request. In order to authenticate,
+you should base-64 encode your email/token combination e.g.
+
+```
+Email => sherbert.lemon@hogwarts.uk
+Token => fa88787fcd99787
+Pre-encode string => sherbert.lemon@hogwarts.uk:fa88787fcd99787
+Authorization token => c2hlcmJlcnQubGVtb25AaG9nd2FydHMudWs6ZmE4ODc4N2ZjZDk5Nzg3
+```
+
+Any request you make to an endpoint should include the following:
 
 ## Making a request: Headers [GET]
 
 These headers will authenticate you against Deploynaut to evaluate whether you have the permissions necessary
-to access the information you are requesting. You can send a GET request to www.deploy.cwp.govt.nz/naut to
-test that you are authenticating correctly - it will return your user information.
+to access the information you are requesting. You can send a GET request to deploy.cwp.govt.nz/naut/profile
+to test that you are authenticating correctly - it will return your user information.
 
 + Request (application/json)
 
     + Headers
 
             X-api-version: 1.0
-            X-user-email: sherbert.lemon@hogwarts.uk
-            X-user-token: fa88787fcd99787
+            Authorization: Basic c2hlcmJlcnQubGVtb25AaG9nd2FydHMudWs6ZmE4ODc4N2ZjZDk5Nzg3
             Accept: application/json
             Host: deploy.cwp.govt.nz
 
@@ -37,16 +45,16 @@ test that you are authenticating correctly - it will return your user informatio
                     "type": "users",
                     "id": "2379",
                     "name": "Albus Dumbledore",
-                    "email": "sherbert.lemon@hogwarts.uk",
-                    "phone": "0203040506"
+                    "email": "sherbert.lemon@hogwarts.uk"
                 }
             ]
         }
 
 
-# Stacks [/projects]
 
-## List all stacks [GET /projects]
+# Stacks [/naut/projects]
+
+## List all stacks [GET /naut/projects]
 
 Will return a list of all stacks that you have the authority to view, with relevant datapoints.
 
@@ -57,49 +65,27 @@ Will return a list of all stacks that you have the authority to view, with relev
             "data": [
                 {
                     "type": "stacks",
-                    "id": "CWP001",
-                    "name": "CWP Stack 001",
-                    "primary_domain": "mom.govt.nz",
-                    "agency": "Ministry of Magic",
-                    "size": "large",
-                    "disaster_recovery": "active",
+                    "name": "CWP001",
+                    "title": "CWP Stack 001",
                     "created": "02-07-2014",
                     "environments": {
                         "count": 2,
                         "data": [
                             {
                                 "type": "environments",
-                                "id": "1",
                                 "name": "prod",
                                 "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
                                 "deployer": {
-                                    "data": [
-                                        {
-                                            "type": "users",
-                                            "id": "2379",
-                                            "name": "Albus Dumbledore",
-                                            "email": "sherbert.lemon@hogwarts.uk",
-                                            "phone": "0203040506"
-                                        }
-                                    ]
+                                    "location": "deploy.govt.nz/naut/users/2379"
                                 },
                                 "date": "24-01-2017"
                             },
                             {
                                 "type": "environments",
-                                "id": "2",
                                 "name": "uat",
                                 "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
                                 "deployer": {
-                                    "data": [
-                                        {
-                                            "type": "users",
-                                            "id": "21279",
-                                            "name": "Severus Snape",
-                                            "email": "halfbloodprince@hogwarts.uk",
-                                            "phone": "020666666"
-                                        }
-                                    ]
+                                    "location": "deploy.govt.nz/naut/users/21279"
                                 },
                                 "date": "23-01-2017"
                             }
@@ -109,7 +95,7 @@ Will return a list of all stacks that you have the authority to view, with relev
             ]
         }
 
-## Get data about a stack [GET /project/$id]
+## Get data about a stack [GET /naut/project/$name]
 
 Get data about a specific stack
 
@@ -118,49 +104,27 @@ Get data about a specific stack
         {
             "data": {
                 "type": "stacks",
-                "id": "CWP001",
-                "name": "CWP Stack 001",
-                "primary_domain": "mom.govt.nz",
-                "agency": "Minstry of Magic",
-                "size": "large",
-                "disaster_recovery": "active",
+                "name": "CWP001",
+                "title": "CWP Stack 001",
                 "created": "02-07-2014",
                 "environments": {
                     "count": 2,
                     "data": [
                         {
                             "type": "environments",
-                            "id": "1",
                             "name": "prod",
                             "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
                             "deployer": {
-                                "data": [
-                                    {
-                                        "type": "users",
-                                        "id": "2379",
-                                        "name": "Albus Dumbledore",
-                                        "email": "sherbert.lemon@hogwarts.uk",
-                                        "phone": "0203040506"
-                                    }
-                                ]
+                                "location": "deploy.govt.nz/naut/users/2379"
                             },
                             "date": "24-01-2017"
                         },
                         {
                             "type": "environments",
-                            "id": "2",
                             "name": "uat",
                             "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
                             "deployer": {
-                                "data": [
-                                    {
-                                        "type": "users",
-                                        "id": "21279",
-                                        "name": "Severus Snape",
-                                        "email": "halfbloodprince@hogwarts.uk",
-                                        "phone": "020666666"
-                                    }
-                                ]
+                                "location": "deploy.govt.nz/naut/users/21279"
                             },
                             "date": "23-01-2017"
                         }
@@ -169,7 +133,7 @@ Get data about a specific stack
             }
         }
 
-## List users [GET /project/$id/users]
+## List users [GET /naut/project/$name/team]
 
 Returns a list of roles and users in those roles for a stack
 
@@ -179,7 +143,6 @@ Returns a list of roles and users in those roles for a stack
             "data": [
                 {
                     "type": "roles",
-                    "id": "21",
                     "name": "Stack Manager",
                     "users": {
                         "count": 2,
@@ -189,21 +152,18 @@ Returns a list of roles and users in those roles for a stack
                                 "id": "2379",
                                 "name": "Albus Dumbledore",
                                 "email": "sherbert.lemon@hogwarts.uk",
-                                "phone": "0203040506"
                             },
                             {
                                 "type": "users",
                                 "id": "21279",
                                 "name": "Severus Snape",
                                 "email": "halfbloodprince@hogwarts.uk",
-                                "phone": "020666666"
                             }
                         ]
                     }
                 },
                 {
                     "type": "roles",
-                    "id": "22",
                     "name": "Deployment Manager",
                     "users": {
                         "count": 1,
@@ -213,7 +173,6 @@ Returns a list of roles and users in those roles for a stack
                                 "id": "224",
                                 "name": "Minerva McGonagall",
                                 "email": "mcgryffindor@hogwarts.uk",
-                                "phone": "02358222506"
                             }
                         ]
                     }
@@ -224,7 +183,7 @@ Returns a list of roles and users in those roles for a stack
 
 # Snapshots [/snapshots]
 
-## List all snapshots [GET /project/$id/snapshots]
+## List all snapshots [GET /naut/project/$name/snapshots]
 
 Returns a list of snapshots associated with a stack
 
@@ -244,7 +203,6 @@ Returns a list of snapshots associated with a stack
                                 "id": "2379",
                                 "name": "Albus Dumbledore",
                                 "email": "sherbert.lemon@hogwarts.uk",
-                                "phone": "0203040506"
                             }
                         ]
                     },
@@ -252,7 +210,6 @@ Returns a list of snapshots associated with a stack
                         "data": [
                             {
                                 "type": "environments",
-                                "id": "1",
                                 "name": "prod"
                             }
                         ]
@@ -261,19 +218,18 @@ Returns a list of snapshots associated with a stack
                         "data": [
                             {
                                 "type": "environments",
-                                "id": "2",
                                 "name": "uat"
                             }
                         ]
                     },
                     "mode": "db",
                     "size": "2096",
-                    "download_link": "www.deploy.cwp.govt.nz/path/to/snapshot.sspak"
+                    "download_link": "deploy.cwp.govt.nz/path/to/snapshot.sspak"
                 }
             ]
         }
 
-## Create a snapshot [POST /project/$id/snapshots]
+## Create a snapshot [POST /naut/project/$name/snapshots]
 
 Create a snapshot of an environment associated with a stack. The response immediately returned will
 contain a `location`, which will return a HTTP 204 response until the snapshot has completed. At that
@@ -297,7 +253,7 @@ point, the response will change to HTTP 200, and the download link will be retur
 + Response 202 (application/json)
 
         {
-            "location": "www.deploy.cwp.govt.nz/naut/project/CWP001/snapshots/23",
+            "location": "deploy.cwp.govt.nz/naut/project/CWP001/snapshots/23",
             "data": [
                 {
                     "type": "snapshots",
@@ -310,7 +266,6 @@ point, the response will change to HTTP 200, and the download link will be retur
                                 "id": "2379",
                                 "name": "Albus Dumbledore",
                                 "email": "sherbert.lemon@hogwarts.uk",
-                                "phone": "0203040506"
                             }
                         ]
                     },
@@ -318,7 +273,6 @@ point, the response will change to HTTP 200, and the download link will be retur
                         "data": [
                             {
                                 "type": "environments",
-                                "id": "1",
                                 "name": "prod"
                             }
                         ]
@@ -327,7 +281,6 @@ point, the response will change to HTTP 200, and the download link will be retur
                         "data": [
                             {
                                 "type": "environments",
-                                "id": "1",
                                 "name": "prod"
                             }
                         ]
@@ -337,7 +290,7 @@ point, the response will change to HTTP 200, and the download link will be retur
             ]
         }
 
-## Get snapshot status [GET /project/$id/snapshots/$id]
+## Get snapshot status [GET /naut/project/$name/snapshots/$id]
 
 You should poll this URL (returned from the CREATE SNAPSHOT method) to receive updates on the status of
 the snapshot. If the snapshot is incomplete, the response will be HTTP 204 (NO CONTENT); otherwise an
@@ -360,7 +313,6 @@ HTTP 200 response will be returned, with a `download_link` from which you can do
                                 "id": "2379",
                                 "name": "Albus Dumbledore",
                                 "email": "sherbert.lemon@hogwarts.uk",
-                                "phone": "0203040506"
                             }
                         ]
                     },
@@ -368,7 +320,6 @@ HTTP 200 response will be returned, with a `download_link` from which you can do
                         "data": [
                             {
                                 "type": "environments",
-                                "id": "1",
                                 "name": "prod"
                             }
                         ]
@@ -377,7 +328,6 @@ HTTP 200 response will be returned, with a `download_link` from which you can do
                         "data": [
                             {
                                 "type": "environments",
-                                "id": "1",
                                 "name": "prod"
                             }
                         ]
@@ -389,7 +339,7 @@ HTTP 200 response will be returned, with a `download_link` from which you can do
             ]
         }
 
-## Delete a snapshot [DELETE /project/$id/snapshots/$id]
+## Delete a snapshot [DELETE /naut/project/$name/snapshots/$id]
 
 This URL will delete the snapshot from the database. Please be careful with this, as reversing the operation
 is expensive and difficult.
