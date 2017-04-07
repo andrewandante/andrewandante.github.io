@@ -10,14 +10,7 @@ This API is a newly developed interface for the CWP Dashboard. Data structure is
 # Using the API [/naut]
 
 In order to use the API, you will need to acquire a token via Service Desk request. In order to authenticate,
-you should base-64 encode your email/token combination e.g.
-
-```
-Email => sherbert.lemon@hogwarts.uk
-Token => fa88787fcd99787
-Pre-encode string => sherbert.lemon@hogwarts.uk:fa88787fcd99787
-Authorization token => c2hlcmJlcnQubGVtb25AaG9nd2FydHMudWs6ZmE4ODc4N2ZjZDk5Nzg3
-```
+you should use HTTP Basic Authentication, using your email with the API token.
 
 Any request you make to an endpoint should include the following:
 
@@ -52,9 +45,9 @@ to test that you are authenticating correctly - it will return your user informa
 
 
 
-# Stacks [/naut/projects]
+# Stacks [/naut]
 
-## List all stacks [GET /naut/projects]
+## List all stacks [GET /naut]
 
 Will return a list of all stacks that you have the authority to view, with relevant datapoints.
 
