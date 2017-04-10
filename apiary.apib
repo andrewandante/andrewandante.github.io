@@ -7,7 +7,7 @@ This API is a newly developed interface for the CWP Dashboard. Data structure is
 [JSON API specifications](http://jsonapi.org/).
 
 
-# Using the API [/naut]
+# Using the API [/naut/profile]
 
 In order to use the API, you will need to acquire a token via Service Desk request. In order to authenticate,
 you should use HTTP Basic Authentication, using your email with the API token.
@@ -68,18 +68,12 @@ Will return a list of all stacks that you have the authority to view, with relev
                                 "type": "environments",
                                 "name": "prod",
                                 "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                                "deployer": {
-                                    "location": "deploy.govt.nz/naut/users/2379"
-                                },
                                 "date": "24-01-2017"
                             },
                             {
                                 "type": "environments",
                                 "name": "uat",
                                 "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                                "deployer": {
-                                    "location": "deploy.govt.nz/naut/users/21279"
-                                },
                                 "date": "23-01-2017"
                             }
                         ]
@@ -107,72 +101,18 @@ Get data about a specific stack
                             "type": "environments",
                             "name": "prod",
                             "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                            "deployer": {
-                                "location": "deploy.govt.nz/naut/users/2379"
-                            },
                             "date": "24-01-2017"
                         },
                         {
                             "type": "environments",
                             "name": "uat",
                             "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                            "deployer": {
-                                "location": "deploy.govt.nz/naut/users/21279"
-                            },
                             "date": "23-01-2017"
                         }
                     ]
                 }
             }
         }
-
-## List users [GET /naut/project/$name/team]
-
-Returns a list of roles and users in those roles for a stack
-
-+ Response 200 (application/json)
-
-        {
-            "data": [
-                {
-                    "type": "roles",
-                    "name": "Stack Manager",
-                    "users": {
-                        "count": 2,
-                        "data": [
-                            {
-                                "type": "users",
-                                "id": "2379",
-                                "name": "Albus Dumbledore",
-                                "email": "sherbert.lemon@hogwarts.uk",
-                            },
-                            {
-                                "type": "users",
-                                "id": "21279",
-                                "name": "Severus Snape",
-                                "email": "halfbloodprince@hogwarts.uk",
-                            }
-                        ]
-                    }
-                },
-                {
-                    "type": "roles",
-                    "name": "Deployment Manager",
-                    "users": {
-                        "count": 1,
-                        "data": [
-                            {
-                                "type": "users",
-                                "id": "224",
-                                "name": "Minerva McGonagall",
-                                "email": "mcgryffindor@hogwarts.uk",
-                            }
-                        ]
-                    }
-                }
-            ]
-        }
-
 
 # Snapshots [/snapshots]
 
@@ -189,16 +129,6 @@ Returns a list of snapshots associated with a stack
                     "type": "snapshots",
                     "id": "398433",
                     "created": "25-01-2017",
-                    "author": {
-                        "data": [
-                            {
-                                "type": "users",
-                                "id": "2379",
-                                "name": "Albus Dumbledore",
-                                "email": "sherbert.lemon@hogwarts.uk",
-                            }
-                        ]
-                    },
                     "source": {
                         "data": [
                             {
@@ -252,16 +182,6 @@ point, the response will change to HTTP 200, and the download link will be retur
                     "type": "snapshots",
                     "id": "23",
                     "created": "25-01-2017",
-                    "author": {
-                        "data": [
-                            {
-                                "type": "users",
-                                "id": "2379",
-                                "name": "Albus Dumbledore",
-                                "email": "sherbert.lemon@hogwarts.uk",
-                            }
-                        ]
-                    },
                     "source": {
                         "data": [
                             {
@@ -299,16 +219,6 @@ HTTP 200 response will be returned, with a `download_link` from which you can do
                     "type": "snapshots",
                     "id": "23",
                     "created": "25-01-2017",
-                    "author": {
-                        "data": [
-                            {
-                                "type": "users",
-                                "id": "2379",
-                                "name": "Albus Dumbledore",
-                                "email": "sherbert.lemon@hogwarts.uk",
-                            }
-                        ]
-                    },
                     "source": {
                         "data": [
                             {
