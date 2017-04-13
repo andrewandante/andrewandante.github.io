@@ -45,9 +45,9 @@ to test that you are authenticating correctly - it will return your user informa
 
 
 
-# Stacks [/naut]
+# Stacks [/naut/projects]
 
-## List all stacks [GET /naut]
+## List all stacks [GET /naut/projects]
 
 Will return a list of all stacks that you have the authority to view, with relevant datapoints.
 
@@ -118,7 +118,8 @@ Get data about a specific stack
 
 ## List all snapshots [GET /naut/project/$name/snapshots]
 
-Returns a list of snapshots associated with a stack
+Returns a list of snapshots associated with a stack. This will include snapshots in progress - which will be
+identifiable by their lack of `download_link` parameter.
 
 + Response 200 (application/json)
 
