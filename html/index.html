@@ -17,57 +17,53 @@ to test that you are authenticating correctly - it will return your user informa
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="stacks" class="resource"><h3 class="resource-heading">Stacks <a href="#stacks" class="permalink">&nbsp;&para;</a></h3><div id="stacks-get" class="action get"><h4 class="action-heading"><div class="name">List all stacks</div><a href="#stacks-get" class="method get">GET</a><code class="uri">/naut/projects</code></h4><p>Will return a list of all stacks that you have the authority to view, with relevant datapoints.</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">http://deploy.cwp.govt.nz</span>/naut/projects</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
-    {
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"stacks"</span></span>,
-      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CWP001"</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"CWP Stack 001"</span></span>,
-      "<span class="hljs-attribute">created</span>": <span class="hljs-value"><span class="hljs-string">"02-07-2014"</span></span>,
-      "<span class="hljs-attribute">environments</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
-        "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
-          {
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"environments"</span></span>,
-            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prod"</span></span>,
-            "<span class="hljs-attribute">build_sha</span>": <span class="hljs-value"><span class="hljs-string">"d0bcf80381579a529957d77a6b0a69303afebe7e"</span></span>,
-            "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"24-01-2017"</span>
-          </span>},
-          {
-            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"environments"</span></span>,
-            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"uat"</span></span>,
-            "<span class="hljs-attribute">build_sha</span>": <span class="hljs-value"><span class="hljs-string">"d0bcf80381579a529957d77a6b0a69303afebe7e"</span></span>,
-            "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"23-01-2017"</span>
-          </span>}
-        ]
-      </span>}
-    </span>}
-  ]
+    "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+    "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+        {
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"stacks"</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CWP001"</span></span>,
+            "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"CWP Stack 001"</span></span>,
+            "<span class="hljs-attribute">created</span>": <span class="hljs-value"><span class="hljs-string">"02-07-2014"</span></span>,
+            "<span class="hljs-attribute">environments</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+                    {
+                        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"environments"</span></span>,
+                        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prod"</span></span>,
+                        "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-string">"http://deploy.cwp.govt.nz/naut/project/cwp001/environment/prod"</span></span>,
+                    },
+                    {
+                        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"environments"</span></span>,
+                        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"uat"</span></span>,
+                        "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-string">"http://deploy.cwp.govt.nz/naut/project/cwp001/environment/uat"</span></span>,
+                    }
+                ]
+            </span>}
+        </span>}
+    ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="stacks-get-1" class="action get"><h4 class="action-heading"><div class="name">Get data about a stack</div><a href="#stacks-get-1" class="method get">GET</a><code class="uri">/naut/project/$name</code></h4><p>Get data about a specific stack</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">http://deploy.cwp.govt.nz</span>/naut/project/$name</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"stacks"</span></span>,
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CWP001"</span></span>,
-    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"CWP Stack 001"</span></span>,
-    "<span class="hljs-attribute">created</span>": <span class="hljs-value"><span class="hljs-string">"02-07-2014"</span></span>,
-    "<span class="hljs-attribute">environments</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
-      "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
-        {
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"environments"</span></span>,
-          "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prod"</span></span>,
-          "<span class="hljs-attribute">build_sha</span>": <span class="hljs-value"><span class="hljs-string">"d0bcf80381579a529957d77a6b0a69303afebe7e"</span></span>,
-          "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"24-01-2017"</span>
-        </span>},
-        {
-          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"environments"</span></span>,
-          "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"uat"</span></span>,
-          "<span class="hljs-attribute">build_sha</span>": <span class="hljs-value"><span class="hljs-string">"d0bcf80381579a529957d77a6b0a69303afebe7e"</span></span>,
-          "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"23-01-2017"</span>
+    "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"stacks"</span></span>,
+        "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CWP001"</span></span>,
+        "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"CWP Stack 001"</span></span>,
+        "<span class="hljs-attribute">created</span>": <span class="hljs-value"><span class="hljs-string">"02-07-2014"</span></span>,
+        "<span class="hljs-attribute">environments</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+            "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+                {
+                    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"environments"</span></span>,
+                    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"prod"</span></span>,
+                    "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-string">"http://deploy.cwp.govt.nz/naut/project/cwp001/environment/prod"</span></span>,
+                },
+                {
+                    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"environments"</span></span>,
+                    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"uat"</span></span>,
+                    "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-string">"http://deploy.cwp.govt.nz/naut/project/cwp001/environment/uat"</span></span>,
+                }
+            ]
         </span>}
-      ]
     </span>}
-  </span>}
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="snapshots" class="resource"><h3 class="resource-heading">Snapshots <a href="#snapshots" class="permalink">&nbsp;&para;</a></h3><div id="snapshots-get" class="action get"><h4 class="action-heading"><div class="name">List all snapshots</div><a href="#snapshots-get" class="method get">GET</a><code class="uri">/naut/project/$name/snapshots</code></h4><p>Returns a list of snapshots associated with a stack. This will include snapshots in progress - which will be
 identifiable by their lack of <code>download_link</code> parameter.</p>
 <h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname">http://deploy.cwp.govt.nz</span>/naut/project/$name/snapshots</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
@@ -94,8 +90,9 @@ identifiable by their lack of <code>download_link</code> parameter.</p>
         ]
       </span>}</span>,
       "<span class="hljs-attribute">mode</span>": <span class="hljs-value"><span class="hljs-string">"db"</span></span>,
+      "<span class="hljs-attribute">download_link</span>": <span class="hljs-value"><span class="hljs-string">"http://deploy.cwp.govt.nz/path/to/snapshot.sspak"</span></span>,
       "<span class="hljs-attribute">size</span>": <span class="hljs-value"><span class="hljs-string">"2096"</span></span>,
-      "<span class="hljs-attribute">download_link</span>": <span class="hljs-value"><span class="hljs-string">"deploy.cwp.govt.nz/path/to/snapshot.sspak"</span>
+      "<span class="hljs-attribute">snapshot_status</span>": <span class="hljs-value"><span class="hljs-string">"complete"</span>
     </span>}
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="snapshots-post" class="action post"><h4 class="action-heading"><div class="name">Create a snapshot</div><a href="#snapshots-post" class="method post">POST</a><code class="uri">/naut/project/$name/snapshots</code></h4><p>Create a snapshot of an environment associated with a stack. The response immediately returned will
@@ -105,7 +102,7 @@ point, the response will change to HTTP 200, and the download link will be retur
     "<span class="hljs-attribute">environment</span>": <span class="hljs-value"><span class="hljs-string">"prod"</span></span>,
     "<span class="hljs-attribute">mode</span>": <span class="hljs-value"><span class="hljs-string">"all"</span></span>,
 }</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>202</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-string">"deploy.cwp.govt.nz/naut/project/CWP001/snapshots/23"</span></span>,
+  "<span class="hljs-attribute">location</span>": <span class="hljs-value"><span class="hljs-string">"http://deploy.cwp.govt.nz/naut/project/CWP001/snapshots/23"</span></span>,
   "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"snapshots"</span></span>,
@@ -127,7 +124,8 @@ point, the response will change to HTTP 200, and the download link will be retur
           </span>}
         ]
       </span>}</span>,
-      "<span class="hljs-attribute">mode</span>": <span class="hljs-value"><span class="hljs-string">"all"</span>
+      "<span class="hljs-attribute">mode</span>": <span class="hljs-value"><span class="hljs-string">"all"</span></span>,
+      "<span class="hljs-attribute">snapshot_status</span>": <span class="hljs-value"><span class="hljs-string">"pending"</span>
     </span>}
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="snapshots-get-1" class="action get"><h4 class="action-heading"><div class="name">Get snapshot status</div><a href="#snapshots-get-1" class="method get">GET</a><code class="uri">/naut/project/$name/snapshots/$id</code></h4><p>You should poll this URL (returned from the CREATE SNAPSHOT method) to receive updates on the status of
@@ -162,7 +160,7 @@ HTTP 200 response will be returned, with a <code>download_link</code> from which
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="snapshots-delete" class="action delete"><h4 class="action-heading"><div class="name">Delete a snapshot</div><a href="#snapshots-delete" class="method delete">DELETE</a><code class="uri">/naut/project/$name/snapshots/$id</code></h4><p>This URL will delete the snapshot from the database. Please be careful with this, as reversing the operation
 is expensive and difficult.</p>
-<h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname">http://deploy.cwp.govt.nz</span>/naut/project/$name/snapshots/$id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>204</code></strong></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 13 Apr 2017</p><script>/* eslint-env browser */
+<h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname">http://deploy.cwp.govt.nz</span>/naut/project/$name/snapshots/$id</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>204</code></strong></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 03 May 2017</p><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
 

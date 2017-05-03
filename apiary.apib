@@ -67,14 +67,12 @@ Will return a list of all stacks that you have the authority to view, with relev
                             {
                                 "type": "environments",
                                 "name": "prod",
-                                "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                                "date": "24-01-2017"
+                                "location": "http://deploy.cwp.govt.nz/naut/project/cwp001/environment/prod",
                             },
                             {
                                 "type": "environments",
                                 "name": "uat",
-                                "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                                "date": "23-01-2017"
+                                "location": "http://deploy.cwp.govt.nz/naut/project/cwp001/environment/uat",
                             }
                         ]
                     }
@@ -100,14 +98,12 @@ Get data about a specific stack
                         {
                             "type": "environments",
                             "name": "prod",
-                            "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                            "date": "24-01-2017"
+                            "location": "http://deploy.cwp.govt.nz/naut/project/cwp001/environment/prod",
                         },
                         {
                             "type": "environments",
                             "name": "uat",
-                            "build_sha": "d0bcf80381579a529957d77a6b0a69303afebe7e",
-                            "date": "23-01-2017"
+                            "location": "http://deploy.cwp.govt.nz/naut/project/cwp001/environment/uat",
                         }
                     ]
                 }
@@ -147,8 +143,9 @@ identifiable by their lack of `download_link` parameter.
                         ]
                     },
                     "mode": "db",
+                    "download_link": "http://deploy.cwp.govt.nz/path/to/snapshot.sspak",
                     "size": "2096",
-                    "download_link": "deploy.cwp.govt.nz/path/to/snapshot.sspak"
+                    "snapshot_status": "complete"
                 }
             ]
         }
@@ -177,7 +174,7 @@ point, the response will change to HTTP 200, and the download link will be retur
 + Response 202 (application/json)
 
         {
-            "location": "deploy.cwp.govt.nz/naut/project/CWP001/snapshots/23",
+            "location": "http://deploy.cwp.govt.nz/naut/project/CWP001/snapshots/23",
             "data": [
                 {
                     "type": "snapshots",
@@ -199,7 +196,8 @@ point, the response will change to HTTP 200, and the download link will be retur
                             }
                         ]
                     },
-                    "mode": "all"
+                    "mode": "all",
+                    "snapshot_status": "pending"
                 }
             ]
         }
