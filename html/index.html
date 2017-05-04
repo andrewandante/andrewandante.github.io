@@ -91,6 +91,8 @@ permissions on a snapshot, but not download permissions, you won’t be presente
         ]
       </span>}</span>,
       "<span class="hljs-attribute">mode</span>": <span class="hljs-value"><span class="hljs-string">"db"</span></span>,
+      "<span class="hljs-attribute">can_download</span>": <span class="hljs-value"><span class="hljs-string">"true"</span></span>,
+      "<span class="hljs-attribute">can_delete</span>": <span class="hljs-value"><span class="hljs-string">"true"</span></span>,
       "<span class="hljs-attribute">download_link</span>": <span class="hljs-value"><span class="hljs-string">"https://dash.cwp.govt.nz/path/to/snapshot.sspak"</span></span>,
       "<span class="hljs-attribute">size</span>": <span class="hljs-value"><span class="hljs-string">"2096"</span></span>,
       "<span class="hljs-attribute">snapshot_status</span>": <span class="hljs-value"><span class="hljs-string">"complete"</span>
@@ -125,6 +127,8 @@ point, the response will change to HTTP 200, and the download link will be retur
           </span>}
         ]
       </span>}</span>,
+      "<span class="hljs-attribute">can_download</span>": <span class="hljs-value"><span class="hljs-string">"true"</span></span>,
+      "<span class="hljs-attribute">can_delete</span>": <span class="hljs-value"><span class="hljs-string">"true"</span></span>,
       "<span class="hljs-attribute">mode</span>": <span class="hljs-value"><span class="hljs-string">"all"</span></span>,
       "<span class="hljs-attribute">snapshot_status</span>": <span class="hljs-value"><span class="hljs-string">"pending"</span>
     </span>}
@@ -156,8 +160,10 @@ HTTP 200 response will be returned, with a <code>download_link</code> from which
       </span>}</span>,
       "<span class="hljs-attribute">mode</span>": <span class="hljs-value"><span class="hljs-string">"all"</span></span>,
       "<span class="hljs-attribute">size</span>": <span class="hljs-value"><span class="hljs-string">"3339820989"</span></span>,
+      "<span class="hljs-attribute">can_download</span>": <span class="hljs-value"><span class="hljs-string">"true"</span></span>,
+      "<span class="hljs-attribute">can_delete</span>": <span class="hljs-value"><span class="hljs-string">"true"</span></span>,
       "<span class="hljs-attribute">download_link</span>": <span class="hljs-value"><span class="hljs-string">"https://dash.cwp.govt.nz/path/to/snapshot.sspak"</span></span>,
-      "<span class="hljs-attribute">snapshot_status</span>": <span class="hljs-value"><span class="hljs-string">"co"</span>
+      "<span class="hljs-attribute">snapshot_status</span>": <span class="hljs-value"><span class="hljs-string">"complete"</span>
     </span>}
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="snapshots-delete" class="action delete"><h4 class="action-heading"><div class="name">Delete a snapshot</div><a href="#snapshots-delete" class="method delete">DELETE</a><code class="uri">/naut/project/$name/snapshots/$id</code></h4><p>This URL will delete the snapshot from the database. Please be careful with this, as reversing the operation
