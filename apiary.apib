@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://deploy.cwp.govt.nz
+HOST: https://dash.cwp.govt.nz
 
 # Deploynaut API
 
@@ -17,7 +17,7 @@ Any request you make to an endpoint should include the following:
 ## Making a request: Headers [GET]
 
 These headers will authenticate you against Deploynaut to evaluate whether you have the permissions necessary
-to access the information you are requesting. You can send a GET request to deploy.cwp.govt.nz/naut/profile
+to access the information you are requesting. You can send a GET request to https://dash.cwp.govt.nz/naut/profile
 to test that you are authenticating correctly - it will return your user information.
 
 + Request (application/json)
@@ -27,7 +27,7 @@ to test that you are authenticating correctly - it will return your user informa
             X-api-version: 1.0
             Authorization: Basic c2hlcmJlcnQubGVtb25AaG9nd2FydHMudWs6ZmE4ODc4N2ZjZDk5Nzg3
             Accept: application/json
-            Host: deploy.cwp.govt.nz
+            Host: https://dash.cwp.govt.nz
 
 
 + Response 200 (application/json)
@@ -67,12 +67,12 @@ Will return a list of all stacks that you have the authority to view, with relev
                             {
                                 "type": "environments",
                                 "name": "prod",
-                                "location": "http://deploy.cwp.govt.nz/naut/project/cwp001/environment/prod",
+                                "location": "https://dash.cwp.govt.nz/naut/project/cwp001/environment/prod",
                             },
                             {
                                 "type": "environments",
                                 "name": "uat",
-                                "location": "http://deploy.cwp.govt.nz/naut/project/cwp001/environment/uat",
+                                "location": "https://dash.cwp.govt.nz/naut/project/cwp001/environment/uat",
                             }
                         ]
                     }
@@ -98,12 +98,12 @@ Get data about a specific stack
                         {
                             "type": "environments",
                             "name": "prod",
-                            "location": "http://deploy.cwp.govt.nz/naut/project/cwp001/environment/prod",
+                            "location": "https://dash.cwp.govt.nz/naut/project/cwp001/environment/prod",
                         },
                         {
                             "type": "environments",
                             "name": "uat",
-                            "location": "http://deploy.cwp.govt.nz/naut/project/cwp001/environment/uat",
+                            "location": "https://dash.cwp.govt.nz/naut/project/cwp001/environment/uat",
                         }
                     ]
                 }
@@ -144,7 +144,7 @@ permissions on a snapshot, but not download permissions, you won't be presented 
                         ]
                     },
                     "mode": "db",
-                    "download_link": "http://deploy.cwp.govt.nz/path/to/snapshot.sspak",
+                    "download_link": "https://dash.cwp.govt.nz/path/to/snapshot.sspak",
                     "size": "2096",
                     "snapshot_status": "complete"
                 }
@@ -175,7 +175,7 @@ point, the response will change to HTTP 200, and the download link will be retur
 + Response 202 (application/json)
 
         {
-            "location": "http://deploy.cwp.govt.nz/naut/project/CWP001/snapshots/23",
+            "location": "https://dash.cwp.govt.nz/naut/project/CWP001/snapshots/23",
             "data": [
                 {
                     "type": "snapshots",
@@ -237,8 +237,8 @@ HTTP 200 response will be returned, with a `download_link` from which you can do
                     },
                     "mode": "all",
                     "size": "3339820989",
-                    "download_link": "www.deploy.cwp.govt.nz/path/to/snapshot.sspak",
-                    "snapshot_status": "complete"
+                    "download_link": "https://dash.cwp.govt.nz/path/to/snapshot.sspak",
+                    "snapshot_status": "co"
                 }
             ]
         }
