@@ -115,7 +115,8 @@ Get data about a specific stack
 ## List all snapshots [GET /naut/project/$name/snapshots]
 
 Returns a list of snapshots associated with a stack. This will include snapshots in progress - which will be
-identifiable by their lack of `download_link` parameter.
+identifiable by the `snapshot_status` of 'pending' and a lack of `download_link` and `size`. If you have view
+permissions on a snapshot, but not download permissions, you won't be presented with a `download_link`.
 
 + Response 200 (application/json)
 
@@ -236,7 +237,8 @@ HTTP 200 response will be returned, with a `download_link` from which you can do
                     },
                     "mode": "all",
                     "size": "3339820989",
-                    "download_link": "www.deploy.cwp.govt.nz/path/to/snapshot.sspak"
+                    "download_link": "www.deploy.cwp.govt.nz/path/to/snapshot.sspak",
+                    "snapshot_status": "complete"
                 }
             ]
         }
